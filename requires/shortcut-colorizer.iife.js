@@ -1,16 +1,3 @@
-// ==UserScript==
-// @name        Shortcut Colorizer
-// @description Apply colors to Shortcut Epics & Objectives
-// @author      Reece Hart <reecehart@gmail.com>
-// @grant       none
-// @icon        https://www.google.com/s2/favicons?domain=shortcut.com
-// @license     MIT
-// @match       https://app.shortcut.com/*/roadmap?*
-// @namespace   http://tampermonkey.net/
-// @version     1.1
-// ==/UserScript==
-
-
 (function () {
     'use strict';
 
