@@ -147,24 +147,27 @@
     return md;
   }
 
+  function triggerDownload(blob, fn) {
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = fn;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    URL.revokeObjectURL(url);
+  }
+
   async function download(fmt) {
     try {
       const orgId = await getOrgId();
       const id = location.pathname.split('/').pop();
       const data = await fetchHistory(orgId, id);
       const text = formatData(data, fmt);
-      const prefix = location.pathname.includes('/project/') ? 'project' : 'chat';
-      const stamp = new Date().toISOString().replace(/[:.]/g, '-');
-      const fn = `${prefix}-${stamp}.${fmt}`;
       const blob = new Blob([text], { type: 'text/plain' });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = fn;
-      document.body.appendChild(a);
-      a.click();
-      a.remove();
-      URL.revokeObjectURL(url);
+      const stamp = data.chat_messages.at(-1).updated_at.split("T")[0]
+      const fn = `${data["name"]}-${stamp}.${fmt}`;
+      triggerDownload(blob, fn)
     } catch (e) {
       console.error(e);
       alert('Download failed—see console for details.');
