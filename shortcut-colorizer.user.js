@@ -1,13 +1,13 @@
 // ==UserScript==
-// @name        Shortcut Objective Colorizer
-// @description Apply colors to Shortcut Objectives
+// @name        Shortcut Colorizer
+// @description Apply colors to Shortcut Epics & Objectives
 // @author      Reece Hart <reecehart@gmail.com>
 // @grant       none
 // @icon        https://www.google.com/s2/favicons?domain=shortcut.com
 // @license     MIT
-// @match       https://app.shortcut.com/*/roadmap
-// @namespace   Violentmonkey Scripts
-// @version     1.0
+// @match       https://app.shortcut.com/*/roadmap?*
+// @namespace   http://tampermonkey.net/
+// @version     1.1
 // ==/UserScript==
 
 
@@ -16,11 +16,21 @@
 
     // Custom CSS to be injected
     const css = `
-        .myome-partner  { background: #cfe2f3 !important;  // light blue 3   }
-        .myome-planning { background: #d9d2e9 !important;  // light purple 3 }
-        .myome-platform { background: #fff2cc !important;  // light yellow 3 }
-        .myome-product  { background: #d9ead3 !important;  // light green 3  }
-        .myome-research { background: #f4cccc !important;  // light red 3    }
+        .x-partner  {
+            border: #9fc5e8 2px solid !important;
+            }
+        .x-planning {
+            border: #b4a7d6 2px solid !important;
+            }
+        .x-platform {
+            border: #ffe599 2px solid !important;
+            }
+        .x-product  {
+            border: #b6d7a8 2px solid !important;
+            }
+        .x-research {
+            border: #ea9999 2px solid !important;
+            }
 `;
 
     // Function to inject CSS into the document
@@ -34,11 +44,11 @@
     // Function to add class to matching elements
     const addClassToProductLinks = () => {
         const mappings = {
-            'Partner:': 'myome-partner',
-            'Platform:': 'myome-platform',
-            'Planning:': 'myome-planning',
-            'Product:': 'myome-product',
-            'Research:': 'myome-research',
+            'Partner:': 'x-partner',
+            'Platform:': 'x-platform',
+            'Planning:': 'x-planning',
+            'Product:': 'x-product',
+            'Research:': 'x-research',
         };
 
         Object.keys(mappings).forEach(prefix => {
