@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Claude Chat Downloader (reece)
 // @version      local-file
-// 
+//
 // @description  Download Claude conversations as txt, md, json
 // @author       Reece Hart (original from Papa Casper)
 // @license      MIT
