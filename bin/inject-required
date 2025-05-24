@@ -2,6 +2,7 @@
 """For userscript stub (.user.js) on stdin, inject require'd file and
 generate userscipt for release"""
 
+import os
 import pathlib
 import re
 import sys
@@ -15,10 +16,13 @@ appendix = ""
 
 for line in body.splitlines():
     m = req_re.match(line)
-    if m:
+    if not m:
+        if line.startswith("// @version"):
+            print("// @version     " + os.environ.get("_INJECT_REQUIRED_GIT_COMMIT", "unknown"))
+        else:
+            print(line)
+    else:
         req_path = iife_dir / m.group(1)
         appendix += "\n\n" + line + "\n" + req_path.open().read()
-    else:
-        print(line)
 
 print(appendix)
