@@ -1,0 +1,24 @@
+#!/usr/bin/env python3
+"""For userscript stub (.user.js) on stdin, inject require'd file and
+generate userscipt for release"""
+
+import pathlib
+import re
+import sys
+
+req_re = re.compile(r"^// @require     file:///.+/(.+)\s*$")
+iife_dir = pathlib.Path("./requires")
+
+
+body = sys.stdin.read()
+appendix = ""
+
+for line in body.splitlines():
+    m = req_re.match(line)
+    if m:
+        req_path = iife_dir / m.group(1)
+        appendix += "\n\n" + line + "\n" + req_path.open().read()
+    else:
+        print(line)
+
+print(appendix)

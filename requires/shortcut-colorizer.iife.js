@@ -2,28 +2,26 @@
     'use strict';
 
     // Custom CSS to be injected
+    // border example: #9fc5e8 2px solid !important;
     const css = `
-        .x-partner  {
-            border: #9fc5e8 2px solid !important;
+        .x-2025q2  {
+            background: #d9ead3 !important;
             }
-        .x-planning {
-            border: #b4a7d6 2px solid !important;
+        .x-2025q3 {
+            background: #fff2cc !important;
             }
-        .x-platform {
-            border: #ffe599 2px solid !important;
+        .x-2025q4 {
+            background: #f4cccc !important;
             }
-        .x-product  {
-            border: #b6d7a8 2px solid !important;
-            }
-        .x-research {
-            border: #ea9999 2px solid !important;
+        .x-2026  {
+            background: #ea9999 !important;
             }
 `;
 
     // Function to inject CSS into the document
     const injectCSS = () => {
         const style = document.createElement('style');
-        style.type = 'text/css';
+        // style.type = 'text/css';
         style.appendChild(document.createTextNode(css));
         document.head.appendChild(style);
     };
@@ -31,11 +29,10 @@
     // Function to add class to matching elements
     const addClassToProductLinks = () => {
         const mappings = {
-            'Partner:': 'x-partner',
-            'Platform:': 'x-platform',
-            'Planning:': 'x-planning',
-            'Product:': 'x-product',
-            'Research:': 'x-research',
+            '2025Q2:': 'x-2025q2',
+            '2025Q3:': 'x-2025q3',
+            '2025Q4:': 'x-2025q4',
+            '2026:': 'x-2026',
         };
 
         Object.keys(mappings).forEach(prefix => {
